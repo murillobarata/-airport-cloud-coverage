@@ -1,0 +1,79 @@
+<div class="container">
+
+  <div class="configuration-form">
+    <form>
+      <div class="row">
+        <div class="mb-3 col-md-6">
+          <label for="airportsNumber" class="form-label">Número de Aeroportos:</label>
+          <input type="number" [(ngModel)]="mapConfig.airportsNumber"
+            name="airportsNumber" id="airportsNumber"
+            min="3" (change)="validateAirportsNumber()"
+            class="form-control" aria-describedby="airportsNumberHelp">
+          <div id="airportsNumberHelp" class="form-text">
+            <span>Quantidade mínima: 3</span>
+            <br>
+            <span>Quantidade máxima: {{mapConfig.xSize * mapConfig.ySize - mapConfig.cloudsNumber}}</span>
+          </div>
+        </div>
+
+        <div class="mb-3 col-md-6">
+          <label for="cloudsNumber" class="form-label">Número de Nuvens:</label>
+          <input type="number" [(ngModel)]="mapConfig.cloudsNumber"
+            name="cloudsNumber" id="cloudsNumber"
+            min="4" (change)="validateCloudsNumber()"
+            class="form-control" aria-describedby="cloudsNumberHelp">
+          <div id="cloudsNumberHelp" class="form-text">
+            <span>Quantidade mínima: 4</span>
+            <br>
+            <span>Quantidade máxima: {{mapConfig.xSize * mapConfig.ySize - mapConfig.airportsNumber}}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="mb-3 col-md-6">
+          <label for="xSize" class="form-label">Tamanho Eixo X:</label>
+          <input type="number" [(ngModel)]="mapConfig.xSize"
+            name="xSize" id="xSize" min="10"
+            class="form-control" aria-describedby="xSizeHelp">
+          <div id="xSizeHelp" class="form-text">
+            <span>Quantidade mínima: 10</span>
+          </div>
+        </div>
+
+        <div class="mb-3 col-md-6">
+          <label for="ySize" class="form-label">Tamanho Eixo Y:</label>
+          <input type="number" [(ngModel)]="mapConfig.ySize"
+            name="ySize" id="ySize" min="10"
+            class="form-control" aria-describedby="ySizeHelp">
+          <div id="ySizeHelp" class="form-text">
+            <span>Quantidade mínima: 10</span>
+          </div>
+        </div>
+      </div>
+
+    </form>
+
+    <button class="btn btn-primary mr-3" (click)="loadMap(); canSimulate = true;">
+      Carregar Mapa
+    </button>
+    <button class="btn btn-success" (click)="loadSimulation()" [disabled]="!canSimulate">
+      Calcular Tempo
+    </button>
+  </div>
+
+  <div class="info-values" *ngIf="showDays">
+    <div class="mt-3 mb-1">
+      O primeiro aeroporto será atingido em: <b>{{firstAirportDays}}</b> {{(firstAirportDays === 1)? 'dia.' : 'dias.'}}
+    </div>
+    <div class="mb-3">
+      Todos os aeroportos serão atingidos em: <b>{{allAirportsDays}}</b> {{(allAirportsDays === 1)? 'dia.' : 'dias.'}}
+    </div>
+  </div>
+
+  <app-country-map
+    [mapConfig]="mapConfig"
+    [frames]="frames">
+  </app-country-map>
+
+</div>

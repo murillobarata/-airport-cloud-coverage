@@ -1,0 +1,31 @@
+.country-map {
+  display: flex;
+  justify-content: center;
+}
+
+.frame {
+  border: 2px solid #333333;
+  border-radius: 0px;
+  width: 2vw;
+  height: 2vw;
+  transition: all 0.5s;
+}
+
+.cloud {
+  background: #929496 !important;
+}
+
+.airport {
+  background: #73e4b9 !important;
+}
+
+.empty {
+  background: #75abe9;
+}
+
+.info {
+  display: flex;
+  .info-item {
+    display: flex;
+  }
+}
